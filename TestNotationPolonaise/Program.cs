@@ -31,6 +31,18 @@ namespace TestNotationPolonaise
             string[] tab = phrase.Split(' ');                  
             int nbCases = tab.Length;                      
            //on vérifie qu'un signe de calcul existe
+           for (int k=0; k<nbCases;k++)
+            {
+                int signe = 0;
+                if (tab[k]=="+"||tab[k]=="-" || tab[k] == "*" || tab[k] == "/")
+                {
+                    signe++;
+                }
+                else
+                {
+                    return float.NaN;
+                }
+            }
 
             for (int n=(nbCases-1); n>=0; n--)
             {                                              
@@ -58,8 +70,16 @@ namespace TestNotationPolonaise
                         case "*":                            
                             resultat = nb1 * nb2;
                             break;
-                        case "/":                            
-                            resultat = nb1/nb2;
+                        case "/":
+                            if (nb2 == 0)
+                            {
+                                return float.NaN;
+                            }
+                            else
+                            {
+                                resultat = nb1/nb2;
+                            }
+                            
                             break;
                     }
                     tab[n] = resultat.ToString();
